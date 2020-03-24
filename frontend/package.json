@@ -9,8 +9,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,md,html}": [
-      "eslint --fix",
-      "git add"
+      ["./node_modules/.bin/eslint --fix","git add"]
     ]
   },
   "dependencies": {
