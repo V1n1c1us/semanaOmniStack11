@@ -8,7 +8,10 @@
     }
   },
   "lint-staged": {
-    "../frontend/src/*.js": ["eslint --fix", "git add"]
+    "*.{js,json,css,md,html}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "react": "^16.13.1",
