@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi'
 
 import api from '../../services/api';
+
+import Loading from '../../components/Loading';
 
 import './style.css';
 import logoImg from '../../assets/logo.svg';
@@ -10,26 +12,37 @@ import heroesImg from '../../assets/heroes.png';
 
 function Logon() {
   const [id, setId] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
       const response = await api.post('sessions', { id });
 
       localStorage.setItem('ong_id', id);
-      localStorage.setItem('ong_name', response.data.name);
-
-      history.push('/profile');
+      setTimeout(() => {
+        localStorage.setItem('ong_name', response.data.name);
+        history.push('/profile');
+      }, 4000)
     }catch(err){
       alert('Falha no Login');
+      setLoading(false);
     }
   }
 
   return (
     <div className="logon-container">
+      { loading ? (
+        <div className="loading">
+          <Loading/>
+        </div>
+      ) : (
+      <>
       <section className="form">
         <img src={logoImg} alt="Be The Hero"/>  
 
@@ -50,6 +63,8 @@ function Logon() {
       </section>
 
       <img src={ heroesImg } alt="Heroes"/>
+      </>
+      )}
     </div>
   );
 }
