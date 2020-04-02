@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
+import Loading from '../../components/Loading';
 
 import api from '../../services/api';
 
@@ -10,7 +11,8 @@ import logoImg from '../../assets/logo.svg';
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
+
   const history = useHistory();
 
   const ongId = localStorage.getItem('ong_id');
@@ -24,6 +26,9 @@ export default function Profile() {
       }
     }).then(response => {
       setIncidents(response.data);
+      setLoading(false);
+    }).finally(() => {
+
     })
   }, [ongId]);
 
@@ -34,7 +39,7 @@ export default function Profile() {
           Authorization: ongId
         }
       });
-    
+
       setIncidents(incidents.filter(incident => incident.id !== id))
     }catch(err){
       alert('Erro ao Deletar o Caso');
@@ -65,6 +70,9 @@ export default function Profile() {
 
       <h1>Casos cadastrados</h1>
 
+      { loading ? (
+        <Loading/>
+      ) : (
       <ul>
         {incidents.map(incident => (
           <li key={incident.id}>
@@ -79,13 +87,14 @@ export default function Profile() {
 
             <button
               type="button"
-              onClick={() => handleDeleteIncident(incident.id)}  
+              onClick={() => handleDeleteIncident(incident.id)}
             >
               <FiTrash2 size={20} color="#a8a8b3"/>
             </button>
           </li>
         ))}
       </ul>
+      )}
     </div>
   );
 }
