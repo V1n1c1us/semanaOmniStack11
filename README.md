@@ -17,6 +17,3 @@ Nele, ONG's iram cadastrar projetos e as pessoas interessadas poderam doar um va
  - <span><img href="https://reactnative.dev/" src="https://img.shields.io/badge/ReactNative-Mobile-blue.svg"/></span>
  - <span><img href="https://nodejs.org/en/" src="https://img.shields.io/badge/NodeJS-Backend-green.svg"/></span>
  - <span><img href="https://pt-br.reactjs.org/" src="https://img.shields.io/badge/React-Frontend-blue.svg"/></span>
-
- ## 
- Para mais projetos acesse meu <a href="https://github.com/AbnerPS">Github <i class="fa fa-github"></i></a>
